@@ -104,6 +104,7 @@ var currentPoster;
 
 // event listeners go here 👇
 
+
 // functions and event handlers go here 👇
 // (we've provided two to get you started)!
 function getRandomIndex(array) {
@@ -117,3 +118,14 @@ function createPoster(imageURL, title, quote) {
     title: title, 
     quote: quote}
 }
+
+function displayRandomPoster() {
+  randomImage = getRandomIndex(images)
+  randomTitle = getRandomIndex(titles)
+  randomQuote = getRandomIndex(quotes)
+
+  currentPoster = createPoster(randomImage, randomTitle, randomQuote)
+}
+
+
+savedPosters.push()
