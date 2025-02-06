@@ -104,7 +104,7 @@ var currentPoster;
 var currentImage = document.querySelector(".poster-img")
 var currentTitle = document.querySelector(".poster-title")
 var currentQuote = document.querySelector(".poster-quote")
-
+var showRandomPosterBtn = 
 // event listeners go here 👇
 
 
@@ -123,7 +123,9 @@ function createPoster(imageURL, title, quote) {
 }
 
 function updatePoster() {
-
+  currentImage.src = currentPoster.imageURL
+  currentTitle.innerText = currentPoster.title
+  currentQuote.innerText = currentPoster.quote
 }
 
 function displayRandomPoster() {
