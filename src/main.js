@@ -122,7 +122,7 @@ function createPoster(imageURL, title, quote) {
     quote: quote}
 }
 
-function updatePosterOnPage() {
+function updatePoster() {
 
 }
 
