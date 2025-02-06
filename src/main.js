@@ -104,11 +104,11 @@ var currentPoster;
 var currentImage = document.querySelector(".poster-img")
 var currentTitle = document.querySelector(".poster-title")
 var currentQuote = document.querySelector(".poster-quote")
-
 var showRandomPosterBtn = document.querySelector(".show-random")
+
 var mainPosterSection = document.querySelector(".main-poster")
-var createPosterSection = document.querySelector("poster-form hidden")
-var savedPostersSection = document.querySelector(".saved-posters hidden")
+var createPosterSection = document.querySelector("poster-form")
+var savedPostersSection = document.querySelector(".saved-posters")
 
 var makePosterBtn = document.querySelector(".show-form")
 var savedPosterBtn = document.querySelector(".save-poster")
@@ -121,10 +121,10 @@ var backToMainBtn = document.querySelector(".back-to-main")
 showRandomPosterBtn.addEventListener("click", displayRandomPoster)
 window.addEventListener("load", displayRandomPoster)
 
-makePosterBtn.addEventListener("click", showFormhideMain)
-savedPosterBtn.addEventListener("click", showSavedHideMain)
-takeMeBackBtn.addEventListener("click", showMainHideForm)
-backToMainBtn.addEventListener("click", showMainHideSaved)
+makePosterBtn.addEventListener("click", hideOnly)
+savedPosterBtn.addEventListener("click", hideOnly)
+takeMeBackBtn.addEventListener("click", hideOnly)
+backToMainBtn.addEventListener("click", hideOnly)
 
 // functions and event handlers go here 👇
 // (we've provided two to get you started)!
@@ -157,5 +157,13 @@ function displayRandomPoster() {
 
   updatePoster()
 }
+
+function hideAllSections() {
+  mainPosterSection.classList.add("hidden")
+  createPosterSection.classList.add("hidden") 
+  savedPostersSection.classList.add("hidden")
+}
+
+
 
 savedPosters.push()
