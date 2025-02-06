@@ -101,6 +101,9 @@ var quotes = [
 ];
 var savedPosters = [];
 var currentPoster;
+var currentImage = document.querySelector(".poster-img")
+var currentTitle = document.querySelector(".poster-title")
+var currentQuote = document.querySelector(".poster-quote")
 
 // event listeners go here 👇
 
@@ -117,6 +120,10 @@ function createPoster(imageURL, title, quote) {
     imageURL: imageURL, 
     title: title, 
     quote: quote}
+}
+
+function updatePosterOnPage() {
+
 }
 
 function displayRandomPoster() {
