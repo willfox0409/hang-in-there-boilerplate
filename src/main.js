@@ -105,6 +105,9 @@ var currentImage = document.querySelector(".poster-img")
 var currentTitle = document.querySelector(".poster-title")
 var currentQuote = document.querySelector(".poster-quote")
 var showRandomPosterBtn = document.querySelector(".show-random")
+var mainPosterSection = document.querySelector(".main-poster")
+var createPosterSection = document.querySelector("poster-form hidden")
+var savedPostersSection = document.querySelector(".saved-posters hidden")
 
 // event listeners go here 👇
 
