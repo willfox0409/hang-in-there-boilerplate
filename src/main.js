@@ -148,6 +148,8 @@ showMyPosterBtn.addEventListener("click", function(event) {
 })
 savePosterBtn.addEventListener("click", savePoster)
 
+showSavedPosterBtn.addEventListener("click", displaySavedPostersGrid)
+
 
 // functions and event handlers go here 👇
 // (we've provided two to get you started)!
