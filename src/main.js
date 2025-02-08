@@ -122,6 +122,7 @@ var posterTitleInput = document.querySelector("#poster-title")
 var posterQuoteInput = document.querySelector("#poster-quote")
 
 var savePosterBtn = document.querySelector(".save-poster")
+var savedPostersGrid = document.querySelector(".saved-posters-grid")
 
 
 // event listeners go here 👇
@@ -217,3 +218,24 @@ function savePoster() {
 //   }
 //   console.log("Saved Posters Array:", savedPosters);
 // }
+
+function displaySavedPostersGrid() {
+  savedPostersGrid.innerHTML = ""
+  savedPosters.forEach(function(poster) {
+    var miniPosterCard = document.createElement("div")
+    miniPosterCard.classList.add("mini-poster")
+    
+    var miniPosterImageUrl = document.createElement("img")
+    miniPosterImageUrl.src = poster.imageURL
+
+    var miniPosterTitle = document.createElement("h2")
+    miniPosterTitle.innerText = poster.title
+
+    var miniPosterQuote = document.createElement("h4")
+    miniPosterQuote.innerText = poster.quote
+
+    miniPosterCard.append(miniPosterImageUrl, miniPosterTitle, miniPosterQuote)
+  
+    savedPostersGrid.append(miniPosterCard)
+  })
+}
