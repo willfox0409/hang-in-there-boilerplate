@@ -132,9 +132,6 @@ window.addEventListener("load", displayRandomPoster)
 showPosterFormBtn.addEventListener("click", function(event) {
   switchPage(createPosterSection)
 })
-savePosterBtn.addEventListener("click", function(event) {
-  switchPage(savePostersSection)
-})
 showSavedPosterBtn.addEventListener("click", function(event) {
   switchPage(savedPostersSection)
 })
@@ -148,7 +145,7 @@ showMyPosterBtn.addEventListener("click", function(event) {
   event.preventDefault()
   handlePosterSubmission()
 })
-
+savePosterBtn.addEventListener("click", savePoster)
 
 
 // functions and event handlers go here 👇
@@ -208,5 +205,6 @@ function handlePosterSubmission() {
 function savePoster() {
   if (!savedPosters.includes(currentPoster))
     savedPosters.push(currentPoster)
+  debugger
 }
 
