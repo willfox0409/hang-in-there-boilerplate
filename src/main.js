@@ -112,7 +112,6 @@ var createPosterSection = document.querySelector(".poster-form")
 var savedPostersSection = document.querySelector(".saved-posters")
 
 var showPosterFormBtn = document.querySelector(".show-form")
-var savePosterBtn = document.querySelector(".save-poster")
 var showSavedPosterBtn = document.querySelector(".show-saved")
 var takeMeBackBtn = document.querySelector(".show-main")
 var backToMainBtn = document.querySelector(".back-to-main")
@@ -121,6 +120,8 @@ var showMyPosterBtn = document.querySelector(".make-poster")
 var posterImageInput = document.querySelector("#poster-image-url")
 var posterTitleInput = document.querySelector("#poster-title")
 var posterQuoteInput = document.querySelector("#poster-quote")
+
+var savePosterBtn = document.querySelector(".save-poster")
 
 
 // event listeners go here 👇
@@ -147,6 +148,8 @@ showMyPosterBtn.addEventListener("click", function(event) {
   event.preventDefault()
   handlePosterSubmission()
 })
+
+
 
 // functions and event handlers go here 👇
 // (we've provided two to get you started)!
@@ -202,5 +205,8 @@ function handlePosterSubmission() {
 
   updatePoster()
 }
+function savePoster() {
+  if (!savedPosters.includes(currentPoster))
+    savedPosters.push(currentPoster)
+}
 
-savedPosters.push()
