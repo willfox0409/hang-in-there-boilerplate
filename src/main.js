@@ -203,8 +203,17 @@ function handlePosterSubmission() {
   updatePoster()
 }
 function savePoster() {
+  // console.log("Current poster being saved:", currentPoster);
   if (!savedPosters.includes(currentPoster))
     savedPosters.push(currentPoster)
-  debugger
+  // debugger
 }
 
+// function savePoster() {
+//   console.log("Save button clicked!");
+//   if (!savedPosters.includes(currentPoster)) {
+//     savedPosters.push(currentPoster);
+//     console.log("Poster saved:", currentPoster);
+//   }
+//   console.log("Saved Posters Array:", savedPosters);
+// }
