@@ -101,6 +101,7 @@ var quotes = [
 ];
 var savedPosters = [];
 var currentPoster;
+
 var currentImage = document.querySelector(".poster-img")
 var currentTitle = document.querySelector(".poster-title")
 var currentQuote = document.querySelector(".poster-quote")
@@ -116,6 +117,10 @@ var showSavedPosterBtn = document.querySelector(".show-saved")
 var takeMeBackBtn = document.querySelector(".show-main")
 var backToMainBtn = document.querySelector(".back-to-main")
 var showMyPosterBtn = document.querySelector(".make-poster")
+
+var posterImageInput = document.querySelector("#poster-image-url")
+var posterTitleInput = document.querySelector("#poster-title")
+var posterQuoteInput = document.querySelector("#poster-quote")
 
 
 // event listeners go here 👇
@@ -140,6 +145,7 @@ backToMainBtn.addEventListener("click", function(event) {
 })
 showMyPosterBtn.addEventListener("click", function(event) {
   event.preventDefault()
+  handlePosterSubmission()
 })
 
 // functions and event handlers go here 👇
@@ -163,7 +169,6 @@ function updatePoster() {
   currentTitle.innerText = currentPoster.title
   currentQuote.innerText = currentPoster.quote
 }
-
 function displayRandomPoster() {
   randomImage = images[getRandomIndex(images)]
   randomTitle = titles[getRandomIndex(titles)]
@@ -173,18 +178,29 @@ function displayRandomPoster() {
 
   updatePoster()
 }
-
 function hideAllSections() {
   mainPosterSection.classList.add("hidden")
   createPosterSection.classList.add("hidden") 
   savedPostersSection.classList.add("hidden")
 }
-
 function switchPage(sectionToView) {
   // debugger
   hideAllSections()
   sectionToView.classList.remove("hidden")
 }
+function handlePosterSubmission() {
+  var imageURLValue = posterImageInput.value
+  var posterTitleValue = posterTitleInput.value
+  var posterQuoteValue = posterQuoteInput.value
+  
+  currentPoster = createPoster(imageURLValue, posterTitleValue, posterQuoteValue)
+  images.push(imageURLValue)
+  titles.push(posterTitleValue)
+  quotes.push(posterQuoteValue)
 
+  switchPage(mainPosterSection)
+
+  updatePoster()
+}
 
 savedPosters.push()
