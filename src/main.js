@@ -115,6 +115,7 @@ var savePosterBtn = document.querySelector(".save-poster")
 var showSavedPosterBtn = document.querySelector(".show-saved")
 var takeMeBackBtn = document.querySelector(".show-main")
 var backToMainBtn = document.querySelector(".back-to-main")
+var showMyPosterBtn = document.querySelector(".make-poster")
 
 
 // event listeners go here 👇
@@ -122,20 +123,23 @@ var backToMainBtn = document.querySelector(".back-to-main")
 showRandomPosterBtn.addEventListener("click", displayRandomPoster)
 window.addEventListener("load", displayRandomPoster)
 
-showPosterFormBtn.addEventListener('click', function(event) {
+showPosterFormBtn.addEventListener("click", function(event) {
   switchPage(createPosterSection)
 })
-savePosterBtn.addEventListener('click', function(event) {
+savePosterBtn.addEventListener("click", function(event) {
   switchPage(savePostersSection)
 })
-showSavedPosterBtn.addEventListener('click', function(event) {
+showSavedPosterBtn.addEventListener("click", function(event) {
   switchPage(savedPostersSection)
 })
-takeMeBackBtn.addEventListener('click', function(event) {
+takeMeBackBtn.addEventListener("click", function(event) {
   switchPage(mainPosterSection)
 })
-backToMainBtn.addEventListener('click', function(event) {
+backToMainBtn.addEventListener("click", function(event) {
   switchPage(mainPosterSection)
+})
+showMyPosterBtn.addEventListener("click", function(event) {
+  event.preventDefault()
 })
 
 // functions and event handlers go here 👇
