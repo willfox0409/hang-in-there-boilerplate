@@ -110,7 +110,7 @@ var mainPosterSection = document.querySelector(".main-poster")
 var createPosterSection = document.querySelector(".poster-form")
 var savedPostersSection = document.querySelector(".saved-posters")
 
-var makePosterBtn = document.querySelector(".show-form")
+var showPosterFormBtn = document.querySelector(".show-form")
 var savePosterBtn = document.querySelector(".save-poster")
 var showSavedPosterBtn = document.querySelector(".show-saved")
 var takeMeBackBtn = document.querySelector(".show-main")
@@ -122,7 +122,7 @@ var backToMainBtn = document.querySelector(".back-to-main")
 showRandomPosterBtn.addEventListener("click", displayRandomPoster)
 window.addEventListener("load", displayRandomPoster)
 
-makePosterBtn.addEventListener('click', function(event) {
+showPosterFormBtn.addEventListener('click', function(event) {
   switchPage(createPosterSection)
 })
 savePosterBtn.addEventListener('click', function(event) {
