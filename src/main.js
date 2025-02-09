@@ -222,6 +222,7 @@ let unmotivationalPosters = [
   }
 ];
 
+var cleanUnmotivationalPosters = []
 
 var savedPosters = [];
 var currentPoster;
@@ -250,6 +251,7 @@ var savedPostersGrid = document.querySelector(".saved-posters-grid")
 
 var unmotivationalPosterBtn = document.querySelector(".show-unmotivational")
 var unmotivationalPosterSection = document.querySelector(".unmotivational-posters")
+var unmotivationalPostersGrid = document.querySelector(".unmotivational-posters-grid")
 var backToMainBtn2 = document.querySelector(".back-to-main-2")
 
 // event listeners go here 👇
@@ -278,11 +280,15 @@ savePosterBtn.addEventListener("click", savePoster)
 showSavedPosterBtn.addEventListener("click", displaySavedPostersGrid)
 
 unmotivationalPosterBtn.addEventListener("click", function(event) {
+  cleanData()
+  displayUnmotivationalPosters ()
   switchPage(unmotivationalPosterSection)
 })
 backToMainBtn2.addEventListener("click", function(event) {
+  console.log("button was clicked")
   switchPage(mainPosterSection)
 })
+
 // functions and event handlers go here 👇
 // (we've provided two to get you started)!
 
@@ -317,7 +323,7 @@ function hideAllSections() {
   mainPosterSection.classList.add("hidden")
   createPosterSection.classList.add("hidden") 
   savedPostersSection.classList.add("hidden")
-  // unmotivationalPosterSection.classList.add("hidden")
+  unmotivationalPosterSection.classList.add("hidden")
 }
 function switchPage(sectionToView) {
   // debugger
@@ -345,15 +351,6 @@ function savePoster() {
   // debugger
 }
 
-// function savePoster() {
-//   console.log("Save button clicked!");
-//   if (!savedPosters.includes(currentPoster)) {
-//     savedPosters.push(currentPoster);
-//     console.log("Poster saved:", currentPoster);
-//   }
-//   console.log("Saved Posters Array:", savedPosters);
-// }
-
 function displaySavedPostersGrid() {
   savedPostersGrid.innerHTML = ""
   savedPosters.forEach(function(poster) {
@@ -372,5 +369,36 @@ function displaySavedPostersGrid() {
     miniPosterCard.append(miniPosterImageUrl, miniPosterTitle, miniPosterQuote)
   
     savedPostersGrid.append(miniPosterCard)
+  })
+}
+
+function cleanData() {
+  cleanUnmotivationalPosters = unmotivationalPosters.map(function(poster) {
+    var imageURL = poster.img_url 
+    var title = poster.name 
+    var quote = poster.description 
+
+    return createPoster(imageURL, title, quote)
+  })
+}
+
+function displayUnmotivationalPosters () {
+  unmotivationalPostersGrid.innerHTML = ""
+  cleanUnmotivationalPosters.forEach(function(poster) {
+    var miniUnmoPosters = document.createElement("div")
+    miniUnmoPosters.classList.add("mini-poster")
+    
+    var miniUnmoImageUrl = document.createElement("img")
+    miniUnmoImageUrl.src = poster.imageURL
+
+    var miniUnmoTitle = document.createElement("h2")
+    miniUnmoTitle.innerText = poster.title
+
+    var miniUnmoQuote = document.createElement("h4")
+    miniUnmoQuote.innerText = poster.quote
+
+    miniUnmoPosters.append(miniUnmoImageUrl, miniUnmoTitle, miniUnmoQuote)
+  
+    unmotivationalPostersGrid.append(miniUnmoPosters)
   })
 }
