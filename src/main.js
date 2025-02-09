@@ -248,6 +248,9 @@ var posterQuoteInput = document.querySelector("#poster-quote")
 var savePosterBtn = document.querySelector(".save-poster")
 var savedPostersGrid = document.querySelector(".saved-posters-grid")
 
+var unmotivationalPosterBtn = document.querySelector(".show-unmotivational")
+var unmotivationalPosterSection = document.querySelector(".unmotivational-posters")
+var backToMainBtn2 = document.querySelector(".back-to-main-2")
 
 // event listeners go here 👇
 
@@ -274,7 +277,12 @@ savePosterBtn.addEventListener("click", savePoster)
 
 showSavedPosterBtn.addEventListener("click", displaySavedPostersGrid)
 
-
+unmotivationalPosterBtn.addEventListener("click", function(event) {
+  switchPage(unmotivationalPosterSection)
+})
+backToMainBtn2.addEventListener("click", function(event) {
+  switchPage(mainPosterSection)
+})
 // functions and event handlers go here 👇
 // (we've provided two to get you started)!
 
@@ -309,6 +317,7 @@ function hideAllSections() {
   mainPosterSection.classList.add("hidden")
   createPosterSection.classList.add("hidden") 
   savedPostersSection.classList.add("hidden")
+  // unmotivationalPosterSection.classList.add("hidden")
 }
 function switchPage(sectionToView) {
   // debugger
