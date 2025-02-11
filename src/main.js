@@ -254,7 +254,7 @@ var unmotivationalPosterSection = document.querySelector(".unmotivational-poster
 var unmotivationalPostersGrid = document.querySelector(".unmotivational-posters-grid")
 var backToMainBtn2 = document.querySelector(".back-to-main-2")
 
-var allMiniUnmoPosters = decodeURIComponent.querySelector("")
+var allMiniUnmoPosters = document.querySelectorAll(".mini-poster")
 // event listeners go here 👇
 
 showRandomPosterBtn.addEventListener("click", displayRandomPoster)
@@ -388,6 +388,8 @@ function displayUnmotivationalPosters () {
   cleanUnmotivationalPosters.forEach(function(poster) {
     var miniUnmoPosters = document.createElement("div")
     miniUnmoPosters.classList.add("mini-poster")
+
+    miniUnmoPosters.setAttribute("data-id", poster.id)
     
     cleanUnmotivationalPosters.addEventListener("dblclick", function(event) {
       deleteUnmotivationalPosters()
@@ -417,11 +419,9 @@ function deleteUnmotivationalPosters(posterID) {
     if (index !== -1) {
       cleanUnmotivationalPosters.splice(index, 1)
     }
-
+  allMiniUnmoPosters.forEach(function(miniPoster) {
+    if (Number(miniPoster.getAttribute("data-id")) === posterID) {
+      miniPoster.remove()
+    }
+  })
 }
-
-// let posterIndex = unmotivationalPosters.findIndex((poster) => {
-//   poster.img_url === posterToDelete.dataset.imageURL
-//   return poster
-
-//  deleting from the array, splice it off?
