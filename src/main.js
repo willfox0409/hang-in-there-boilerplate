@@ -254,7 +254,6 @@ var unmotivationalPosterSection = document.querySelector(".unmotivational-poster
 var unmotivationalPostersGrid = document.querySelector(".unmotivational-posters-grid")
 var backToMainBtn2 = document.querySelector(".back-to-main-2")
 
-var allMiniUnmoPosters = document.querySelectorAll(".mini-poster")
 // event listeners go here 👇
 
 showRandomPosterBtn.addEventListener("click", displayRandomPoster)
@@ -299,7 +298,7 @@ function getRandomIndex(array) {
 
 function createPoster(imageURL, title, quote) {
   return {
-    id: Date.now(), 
+    id: Date.now() + Math.random(), 
     imageURL: imageURL, 
     title: title, 
     quote: quote}
@@ -388,11 +387,17 @@ function displayUnmotivationalPosters () {
   cleanUnmotivationalPosters.forEach(function(poster) {
     var miniUnmoPosters = document.createElement("div")
     miniUnmoPosters.classList.add("mini-poster")
-
     miniUnmoPosters.setAttribute("data-id", poster.id)
+    // console.log("Assigned Data-ID:", miniUnmoPosters.getAttribute("data-id"));
     
-    cleanUnmotivationalPosters.addEventListener("dblclick", function(event) {
-      deleteUnmotivationalPosters()
+    miniUnmoPosters.addEventListener("dblclick", function(event) {
+      
+      var clickedPoster = event.target.closest(".mini-poster")
+      if (clickedPoster) {
+        var posterID = Number(clickedPoster.getAttribute("data-id"))
+        console.log("Double-clicked poster ID:", posterID);
+      deleteUnmotivationalPosters(posterID)
+      }
     })
     
     var miniUnmoImageUrl = document.createElement("img")
@@ -411,7 +416,6 @@ function displayUnmotivationalPosters () {
 }
 
 function deleteUnmotivationalPosters(posterID) {
- 
   let index = cleanUnmotivationalPosters.findIndex(function(poster) {
     return poster.id === posterID
   })
@@ -419,8 +423,9 @@ function deleteUnmotivationalPosters(posterID) {
     if (index !== -1) {
       cleanUnmotivationalPosters.splice(index, 1)
     }
-  allMiniUnmoPosters.forEach(function(miniPoster) {
+    document.querySelectorAll(".mini-poster").forEach(function(miniPoster) {
     if (Number(miniPoster.getAttribute("data-id")) === posterID) {
+      // console.log("✅ Match Found! Deleting Mini Poster:", miniPoster);
       miniPoster.remove()
     }
   })
