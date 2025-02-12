@@ -395,7 +395,7 @@ function displayUnmotivationalPosters () {
       var clickedPoster = event.target.closest(".mini-poster")
       if (clickedPoster) {
         var posterID = Number(clickedPoster.getAttribute("data-id"))
-        console.log("Double-clicked poster ID:", posterID);
+        // console.log("Double-clicked poster ID:", posterID);
       deleteUnmotivationalPosters(posterID)
       }
     })
@@ -425,7 +425,6 @@ function deleteUnmotivationalPosters(posterID) {
     }
     document.querySelectorAll(".mini-poster").forEach(function(miniPoster) {
     if (Number(miniPoster.getAttribute("data-id")) === posterID) {
-      // console.log("✅ Match Found! Deleting Mini Poster:", miniPoster);
       miniPoster.remove()
     }
   })
