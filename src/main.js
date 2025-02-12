@@ -1,7 +1,6 @@
-// query selector variables go here 👇
 
-// we've provided you with some data to work with 👇
-// tip: you can tuck this data out of view with the dropdown found near the line number where the variable is declared 
+
+//  ** DATA ASSETS **
 var images = [
   "./assets/bees.jpg",
   "./assets/bridge.jpg",
@@ -21,7 +20,7 @@ var images = [
   "./assets/squirrel.jpg",
   "./assets/tiger.jpg",
   "./assets/turtle.jpg"
-];
+]
 var titles = [
   "determination",
   "success",
@@ -58,7 +57,7 @@ var titles = [
   "trust",
   "understanding",
   "wisdom"
-];
+]
 var quotes = [
   "Don’t downgrade your dream just to fit your reality, upgrade your conviction to match your destiny.",
   "You are braver than you believe, stronger than you seem and smarter than you think.",
@@ -98,7 +97,7 @@ var quotes = [
   "No matter what people tell you, words and ideas can change the world.",
   "Each person must live their life as a model for others.",
   "A champion is defined not by their wins but by how they can recover when they fall."
-];
+]
 let unmotivationalPosters = [
   {
     name: "FAILURE",
@@ -220,44 +219,42 @@ let unmotivationalPosters = [
     vintage: false,
     img_url: "./assets/doubt.jpg",
   }
-];
+]
 
+//   ** GLOBAL VARIABLES **
 var cleanUnmotivationalPosters = []
+var savedPosters = []
+var currentPoster
+var postersDeleted = false
 
-var savedPosters = [];
-var currentPoster;
-
+//   ** QUERY SELECTORS **
 var currentImage = document.querySelector(".poster-img")
 var currentTitle = document.querySelector(".poster-title")
 var currentQuote = document.querySelector(".poster-quote")
-var showRandomPosterBtn = document.querySelector(".show-random")
 
 var mainPosterSection = document.querySelector(".main-poster")
 var createPosterSection = document.querySelector(".poster-form")
 var savedPostersSection = document.querySelector(".saved-posters")
+var unmotivationalPosterSection = document.querySelector(".unmotivational-posters")
 
+var savedPostersGrid = document.querySelector(".saved-posters-grid")
+var unmotivationalPostersGrid = document.querySelector(".unmotivational-posters-grid")
+
+var showRandomPosterBtn = document.querySelector(".show-random")
 var showPosterFormBtn = document.querySelector(".show-form")
 var showSavedPosterBtn = document.querySelector(".show-saved")
 var takeMeBackBtn = document.querySelector(".show-main")
 var backToMainBtn = document.querySelector(".back-to-main")
 var showMyPosterBtn = document.querySelector(".make-poster")
+var savePosterBtn = document.querySelector(".save-poster")
+var unmotivationalPosterBtn = document.querySelector(".show-unmotivational")
+var backToMainBtn2 = document.querySelector(".back-to-main-2")
 
 var posterImageInput = document.querySelector("#poster-image-url")
 var posterTitleInput = document.querySelector("#poster-title")
 var posterQuoteInput = document.querySelector("#poster-quote")
 
-var savePosterBtn = document.querySelector(".save-poster")
-var savedPostersGrid = document.querySelector(".saved-posters-grid")
-
-var unmotivationalPosterBtn = document.querySelector(".show-unmotivational")
-var unmotivationalPosterSection = document.querySelector(".unmotivational-posters")
-var unmotivationalPostersGrid = document.querySelector(".unmotivational-posters-grid")
-var backToMainBtn2 = document.querySelector(".back-to-main-2")
-
-var postersDeleted = false
-
-// event listeners go here 👇
-
+// ** EVENT LISTENERS **
 showRandomPosterBtn.addEventListener("click", displayRandomPoster)
 window.addEventListener("load", displayRandomPoster)
 
@@ -283,7 +280,7 @@ showSavedPosterBtn.addEventListener("click", displaySavedPostersGrid)
 
 unmotivationalPosterBtn.addEventListener("click", function(event) {
   cleanData()
-  displayUnmotivationalPosters ()
+  displayUnmotivationalPosters()
   switchPage(unmotivationalPosterSection)
 })
 backToMainBtn2.addEventListener("click", function(event) {
@@ -293,9 +290,7 @@ backToMainBtn2.addEventListener("click", function(event) {
 
 unmotivationalPostersGrid.addEventListener("dblclick", handleUnmotivationalPosterClick)
 
-// functions and event handlers go here 👇
-// (we've provided two to get you started)!
-
+//   ** FUNCTIONS **
 function getRandomIndex(array) {
   return Math.floor(Math.random() * array.length);
 }
@@ -308,7 +303,6 @@ function createPoster(imageURL, title, quote) {
     quote: quote}
 }
 
-// my functions
 function updatePoster() {
   currentImage.src = currentPoster.imageURL
   currentTitle.innerText = currentPoster.title
@@ -330,7 +324,6 @@ function hideAllSections() {
   unmotivationalPosterSection.classList.add("hidden")
 }
 function switchPage(sectionToView) {
-  // debugger
   hideAllSections()
   sectionToView.classList.remove("hidden")
 }
@@ -349,14 +342,13 @@ function handlePosterSubmission() {
   updatePoster()
 }
 function savePoster() {
-  // console.log("Current poster being saved:", currentPoster);
   if (!savedPosters.includes(currentPoster))
     savedPosters.push(currentPoster)
-  // debugger
 }
 
 function displaySavedPostersGrid() {
   savedPostersGrid.innerHTML = ""
+
   savedPosters.forEach(function(poster) {
     var miniPosterCard = document.createElement("div")
     miniPosterCard.classList.add("mini-poster")
@@ -378,6 +370,7 @@ function displaySavedPostersGrid() {
 
 function cleanData() {
   if (cleanUnmotivationalPosters.length === 0 && !postersDeleted) {
+
     cleanUnmotivationalPosters = unmotivationalPosters.map(function(poster) {
       var imageURL = poster.img_url 
       var title = poster.name 
@@ -390,6 +383,7 @@ function cleanData() {
 
 function displayUnmotivationalPosters () {
   unmotivationalPostersGrid.innerHTML = ""
+
     cleanUnmotivationalPosters.forEach(function(poster) {
 
     var miniUnmoPosters = document.createElement("div")
@@ -398,13 +392,14 @@ function displayUnmotivationalPosters () {
   
     var miniUnmoImageUrl = document.createElement("img")
     miniUnmoImageUrl.src = poster.imageURL
+
     var miniUnmoTitle = document.createElement("h2")
     miniUnmoTitle.innerText = poster.title
+
     var miniUnmoQuote = document.createElement("h4")
     miniUnmoQuote.innerText = poster.quote
 
     miniUnmoPosters.append(miniUnmoImageUrl, miniUnmoTitle, miniUnmoQuote)
-  
     unmotivationalPostersGrid.append(miniUnmoPosters)
     })
 }
