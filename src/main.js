@@ -390,23 +390,23 @@ function cleanData() {
 
 function displayUnmotivationalPosters () {
   unmotivationalPostersGrid.innerHTML = ""
-      cleanUnmotivationalPosters.forEach(function(poster) {
+    cleanUnmotivationalPosters.forEach(function(poster) {
 
-        var miniUnmoPosters = document.createElement("div")
-        miniUnmoPosters.classList.add("mini-poster")
-        miniUnmoPosters.setAttribute("data-id", poster.id)
+    var miniUnmoPosters = document.createElement("div")
+    miniUnmoPosters.classList.add("mini-poster")
+    miniUnmoPosters.setAttribute("data-id", poster.id)
   
-        var miniUnmoImageUrl = document.createElement("img")
-        miniUnmoImageUrl.src = poster.imageURL
-        var miniUnmoTitle = document.createElement("h2")
-        miniUnmoTitle.innerText = poster.title
-        var miniUnmoQuote = document.createElement("h4")
-        miniUnmoQuote.innerText = poster.quote
+    var miniUnmoImageUrl = document.createElement("img")
+    miniUnmoImageUrl.src = poster.imageURL
+    var miniUnmoTitle = document.createElement("h2")
+    miniUnmoTitle.innerText = poster.title
+    var miniUnmoQuote = document.createElement("h4")
+    miniUnmoQuote.innerText = poster.quote
 
-        miniUnmoPosters.append(miniUnmoImageUrl, miniUnmoTitle, miniUnmoQuote)
+    miniUnmoPosters.append(miniUnmoImageUrl, miniUnmoTitle, miniUnmoQuote)
   
-        unmotivationalPostersGrid.append(miniUnmoPosters)
-      })
+    unmotivationalPostersGrid.append(miniUnmoPosters)
+    })
 }
 
 function deleteUnmotivationalPosters(posterID) {
