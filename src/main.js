@@ -254,6 +254,8 @@ var unmotivationalPosterSection = document.querySelector(".unmotivational-poster
 var unmotivationalPostersGrid = document.querySelector(".unmotivational-posters-grid")
 var backToMainBtn2 = document.querySelector(".back-to-main-2")
 
+var postersDeleted = false
+
 // event listeners go here 👇
 
 showRandomPosterBtn.addEventListener("click", displayRandomPoster)
@@ -288,6 +290,8 @@ backToMainBtn2.addEventListener("click", function(event) {
   console.log("button was clicked")
   switchPage(mainPosterSection)
 })
+
+unmotivationalPostersGrid.addEventListener("dblclick", handleUnmotivationalPosterClick)
 
 // functions and event handlers go here 👇
 // (we've provided two to get you started)!
@@ -373,46 +377,36 @@ function displaySavedPostersGrid() {
 }
 
 function cleanData() {
-  cleanUnmotivationalPosters = unmotivationalPosters.map(function(poster) {
-    var imageURL = poster.img_url 
-    var title = poster.name 
-    var quote = poster.description 
+  if (cleanUnmotivationalPosters.length === 0 && !postersDeleted) {
+    cleanUnmotivationalPosters = unmotivationalPosters.map(function(poster) {
+      var imageURL = poster.img_url 
+      var title = poster.name 
+      var quote = poster.description 
 
-    return createPoster(imageURL, title, quote)
-  })
+      return createPoster(imageURL, title, quote)
+    })
+  }
 }
 
 function displayUnmotivationalPosters () {
   unmotivationalPostersGrid.innerHTML = ""
-  cleanUnmotivationalPosters.forEach(function(poster) {
-    var miniUnmoPosters = document.createElement("div")
-    miniUnmoPosters.classList.add("mini-poster")
-    miniUnmoPosters.setAttribute("data-id", poster.id)
-    // console.log("Assigned Data-ID:", miniUnmoPosters.getAttribute("data-id"));
-    
-    miniUnmoPosters.addEventListener("dblclick", function(event) {
-      
-      var clickedPoster = event.target.closest(".mini-poster")
-      if (clickedPoster) {
-        var posterID = Number(clickedPoster.getAttribute("data-id"))
-        // console.log("Double-clicked poster ID:", posterID);
-      deleteUnmotivationalPosters(posterID)
-      }
-    })
-    
-    var miniUnmoImageUrl = document.createElement("img")
-    miniUnmoImageUrl.src = poster.imageURL
+      cleanUnmotivationalPosters.forEach(function(poster) {
 
-    var miniUnmoTitle = document.createElement("h2")
-    miniUnmoTitle.innerText = poster.title
-
-    var miniUnmoQuote = document.createElement("h4")
-    miniUnmoQuote.innerText = poster.quote
-
-    miniUnmoPosters.append(miniUnmoImageUrl, miniUnmoTitle, miniUnmoQuote)
+        var miniUnmoPosters = document.createElement("div")
+        miniUnmoPosters.classList.add("mini-poster")
+        miniUnmoPosters.setAttribute("data-id", poster.id)
   
-    unmotivationalPostersGrid.append(miniUnmoPosters)
-  })
+        var miniUnmoImageUrl = document.createElement("img")
+        miniUnmoImageUrl.src = poster.imageURL
+        var miniUnmoTitle = document.createElement("h2")
+        miniUnmoTitle.innerText = poster.title
+        var miniUnmoQuote = document.createElement("h4")
+        miniUnmoQuote.innerText = poster.quote
+
+        miniUnmoPosters.append(miniUnmoImageUrl, miniUnmoTitle, miniUnmoQuote)
+  
+        unmotivationalPostersGrid.append(miniUnmoPosters)
+      })
 }
 
 function deleteUnmotivationalPosters(posterID) {
@@ -423,9 +417,21 @@ function deleteUnmotivationalPosters(posterID) {
     if (index !== -1) {
       cleanUnmotivationalPosters.splice(index, 1)
     }
+
     document.querySelectorAll(".mini-poster").forEach(function(miniPoster) {
     if (Number(miniPoster.getAttribute("data-id")) === posterID) {
       miniPoster.remove()
     }
   })
+  if (cleanUnmotivationalPosters.length === 0) {
+    postersDeleted = true
+  }
+}
+
+function handleUnmotivationalPosterClick(event) {
+  var clickedPoster = event.target.closest(".mini-poster")
+      if (clickedPoster) {
+        var posterID = Number(clickedPoster.getAttribute("data-id"))
+        deleteUnmotivationalPosters(posterID)
+      }
 }
