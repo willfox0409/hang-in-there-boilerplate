@@ -151,7 +151,7 @@ button:hover {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 12px 20px;
+  gap: 15px 15px;
   padding: 20px;
 }
 
@@ -162,7 +162,7 @@ button:hover {
   min-width: 250px; 
   height: auto;
   border-radius: 10px;
-  margin: .1px;
+  margin: 0px;
 }
 
 .unmotivational-posters-grid .mini-poster h2 {
