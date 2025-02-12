@@ -1,6 +1,5 @@
-
-
 //  ** DATA ASSETS **
+
 var images = [
   "./assets/bees.jpg",
   "./assets/bridge.jpg",
@@ -222,12 +221,14 @@ let unmotivationalPosters = [
 ]
 
 //   ** GLOBAL VARIABLES **
+
 var cleanUnmotivationalPosters = []
 var savedPosters = []
 var currentPoster
 var postersDeleted = false
 
 //   ** QUERY SELECTORS **
+
 var currentImage = document.querySelector(".poster-img")
 var currentTitle = document.querySelector(".poster-title")
 var currentQuote = document.querySelector(".poster-quote")
@@ -255,42 +256,49 @@ var posterTitleInput = document.querySelector("#poster-title")
 var posterQuoteInput = document.querySelector("#poster-quote")
 
 // ** EVENT LISTENERS **
-showRandomPosterBtn.addEventListener("click", displayRandomPoster)
-window.addEventListener("load", displayRandomPoster)
+
+showRandomPosterBtn.addEventListener("click", displayRandomPoster);
+window.addEventListener("load", displayRandomPoster);
 
 showPosterFormBtn.addEventListener("click", function(event) {
-  switchPage(createPosterSection)
-})
-showSavedPosterBtn.addEventListener("click", function(event) {
-  switchPage(savedPostersSection)
-})
-takeMeBackBtn.addEventListener("click", function(event) {
-  switchPage(mainPosterSection)
-})
-backToMainBtn.addEventListener("click", function(event) {
-  switchPage(mainPosterSection)
-})
-showMyPosterBtn.addEventListener("click", function(event) {
-  event.preventDefault()
-  handlePosterSubmission()
-})
-savePosterBtn.addEventListener("click", savePoster)
+  switchPage(createPosterSection);
+});
 
-showSavedPosterBtn.addEventListener("click", displaySavedPostersGrid)
+showSavedPosterBtn.addEventListener("click", function(event) {
+  switchPage(savedPostersSection);
+});
+
+takeMeBackBtn.addEventListener("click", function(event) {
+  switchPage(mainPosterSection);
+});
+
+backToMainBtn.addEventListener("click", function(event) {
+  switchPage(mainPosterSection);
+});
+
+showMyPosterBtn.addEventListener("click", function(event) {
+  event.preventDefault();
+  handlePosterSubmission();
+});
+
+savePosterBtn.addEventListener("click", savePoster);
+showSavedPosterBtn.addEventListener("click", displaySavedPostersGrid);
 
 unmotivationalPosterBtn.addEventListener("click", function(event) {
-  cleanData()
-  displayUnmotivationalPosters()
-  switchPage(unmotivationalPosterSection)
-})
-backToMainBtn2.addEventListener("click", function(event) {
-  console.log("button was clicked")
-  switchPage(mainPosterSection)
-})
+  cleanData();
+  displayUnmotivationalPosters();
+  switchPage(unmotivationalPosterSection);
+});
 
-unmotivationalPostersGrid.addEventListener("dblclick", handleUnmotivationalPosterClick)
+backToMainBtn2.addEventListener("click", function(event) {
+  console.log("button was clicked");
+  switchPage(mainPosterSection);
+});
+
+unmotivationalPostersGrid.addEventListener("dblclick", handleUnmotivationalPosterClick);
 
 //   ** FUNCTIONS **
+
 function getRandomIndex(array) {
   return Math.floor(Math.random() * array.length);
 }
@@ -308,6 +316,7 @@ function updatePoster() {
   currentTitle.innerText = currentPoster.title
   currentQuote.innerText = currentPoster.quote
 }
+
 function displayRandomPoster() {
   randomImage = images[getRandomIndex(images)]
   randomTitle = titles[getRandomIndex(titles)]
@@ -317,30 +326,34 @@ function displayRandomPoster() {
 
   updatePoster()
 }
+
 function hideAllSections() {
   mainPosterSection.classList.add("hidden")
   createPosterSection.classList.add("hidden") 
   savedPostersSection.classList.add("hidden")
   unmotivationalPosterSection.classList.add("hidden")
 }
+
 function switchPage(sectionToView) {
   hideAllSections()
   sectionToView.classList.remove("hidden")
 }
+
 function handlePosterSubmission() {
   var imageURLValue = posterImageInput.value
   var posterTitleValue = posterTitleInput.value
   var posterQuoteValue = posterQuoteInput.value
   
   currentPoster = createPoster(imageURLValue, posterTitleValue, posterQuoteValue)
+
   images.push(imageURLValue)
   titles.push(posterTitleValue)
   quotes.push(posterQuoteValue)
 
   switchPage(mainPosterSection)
-
   updatePoster()
 }
+
 function savePoster() {
   if (!savedPosters.includes(currentPoster))
     savedPosters.push(currentPoster)
@@ -384,7 +397,7 @@ function cleanData() {
 function displayUnmotivationalPosters () {
   unmotivationalPostersGrid.innerHTML = ""
 
-    cleanUnmotivationalPosters.forEach(function(poster) {
+  cleanUnmotivationalPosters.forEach(function(poster) {
 
     var miniUnmoPosters = document.createElement("div")
     miniUnmoPosters.classList.add("mini-poster")
@@ -401,23 +414,24 @@ function displayUnmotivationalPosters () {
 
     miniUnmoPosters.append(miniUnmoImageUrl, miniUnmoTitle, miniUnmoQuote)
     unmotivationalPostersGrid.append(miniUnmoPosters)
-    })
+  })
 }
 
 function deleteUnmotivationalPosters(posterID) {
-  let index = cleanUnmotivationalPosters.findIndex(function(poster) {
+  var index = cleanUnmotivationalPosters.findIndex(function(poster) {
     return poster.id === posterID
   })
   
-    if (index !== -1) {
-      cleanUnmotivationalPosters.splice(index, 1)
-    }
+  if (index !== -1) {
+    cleanUnmotivationalPosters.splice(index, 1)
+  }
 
-    document.querySelectorAll(".mini-poster").forEach(function(miniPoster) {
+  document.querySelectorAll(".mini-poster").forEach(function(miniPoster) {
     if (Number(miniPoster.getAttribute("data-id")) === posterID) {
       miniPoster.remove()
     }
   })
+
   if (cleanUnmotivationalPosters.length === 0) {
     postersDeleted = true
   }
@@ -425,8 +439,9 @@ function deleteUnmotivationalPosters(posterID) {
 
 function handleUnmotivationalPosterClick(event) {
   var clickedPoster = event.target.closest(".mini-poster")
-      if (clickedPoster) {
-        var posterID = Number(clickedPoster.getAttribute("data-id"))
-        deleteUnmotivationalPosters(posterID)
-      }
+
+  if (clickedPoster) {
+    var posterID = Number(clickedPoster.getAttribute("data-id"))
+    deleteUnmotivationalPosters(posterID)
+  }
 }
