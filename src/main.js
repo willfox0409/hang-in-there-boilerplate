@@ -1,4 +1,4 @@
-//  ** DATA ASSETS **
+//  ** PRESET DATA **
 
 var images = [
   "./assets/bees.jpg",
